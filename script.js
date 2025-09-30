@@ -22,9 +22,7 @@ const retryBtn = document.getElementById("retry-today");
 const exitQuizBtn = document.getElementById("exit-quiz");
 
 const timerEl = document.getElementById("timer");
-const progressEl = document.getElementById("question-progress");
 const currentQEl = document.getElementById("current-q");
-
 const qContent = document.getElementById("q-content");
 const optionsList = document.getElementById("options-list");
 
@@ -45,28 +43,24 @@ const themeToggle = document.getElementById("theme-toggle");
 const todayDisplay = document.getElementById("today-display");
 const footerYear = document.getElementById("footer-year");
 
-// Ensure the DOM is loaded before attaching the event
-document.addEventListener("DOMContentLoaded", () => {
-  const goMainBtn = document.getElementById("go-main");
-
-  goMainBtn.addEventListener("click", () => {
-    window.open("https://testranking.netlify.app", "_blank"); // opens in new tab
-  });
-});
-
 /* --------- INIT --------- */
 document.addEventListener("DOMContentLoaded", () => {
   footerYear.textContent = new Date().getFullYear();
   todayDisplay.textContent = new Date().toDateString();
 
-  // Restore theme
+  const goMainBtn = document.getElementById("go-main");
+  if (goMainBtn) {
+    goMainBtn.addEventListener("click", () => {
+      window.open("https://testranking.netlify.app", "_blank");
+    });
+  }
+
   if (localStorage.getItem("theme") === "dark") {
     document.getElementById("app").classList.replace("light", "dark");
     themeToggle.setAttribute("aria-pressed", "true");
     document.getElementById("theme-icon").textContent = "☀️";
   }
 
-  // Button events
   startBtn.addEventListener("click", startQuiz);
   lastResultBtn.addEventListener("click", showLastResult);
   backHomeBtn.addEventListener("click", () => switchPanel("home"));
@@ -83,51 +77,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* --------- QUIZ LOGIC --------- */
 function startQuiz() {
-  // Get today's unique key
   const todayKey = new Date().toISOString().slice(0, 10);
   const savedSet = localStorage.getItem("dmk-set-" + todayKey);
 
   if (savedSet) {
     dailyQuestions = JSON.parse(savedSet);
   } else {
-    dailyQuestions = pickDailyQuestions();
+    dailyQuestions = pickDailyQuestions(10); // pick 10 random questions
     localStorage.setItem("dmk-set-" + todayKey, JSON.stringify(dailyQuestions));
   }
 
-  // Reset state
   answers = {};
   currentIndex = 0;
   timeLeft = 600;
   clearInterval(timerInterval);
   timerInterval = setInterval(updateTimer, 1000);
 
-  // Build palette
   buildPalette();
-
-  // Show first question
   renderQuestion();
-
-  // Switch panels
   switchPanel("quiz");
 }
 
-function pickDailyQuestions() {
-  let pool = [];
-  Object.keys(questionsDB).forEach(subject => {
-    pool = pool.concat(questionsDB[subject]);
+function pickDailyQuestions(count = 10) {
+  // Flatten all questions from all topics
+  const pool = Object.values(questionsDB).flat();
+
+  if (pool.length < count) {
+    console.error("Not enough questions in the database!");
+    return pool;
+  }
+
+  // Shuffle all questions using Fisher-Yates
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+
+  // Pick first 'count' questions
+  const selected = pool.slice(0, count);
+
+  // Shuffle options for each question
+  selected.forEach(q => {
+    const answerIndex = q.answer;
+    const options = [...q.options];
+    for (let i = options.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+    // Update answer index after shuffling
+    q.answer = options.findIndex(opt => opt === q.options[answerIndex]);
+    q.options = options;
   });
 
-  // Shuffle
-  pool.sort(() => Math.random() - 0.5);
-
-  // Pick first 10
-  return pool.slice(0, 10);
+  return selected;
 }
 
 function renderQuestion() {
   const q = dailyQuestions[currentIndex];
   currentQEl.textContent = currentIndex + 1;
-
   qContent.textContent = q.question;
   optionsList.innerHTML = "";
 
@@ -139,9 +146,7 @@ function renderQuestion() {
     input.name = "option";
     input.value = idx;
 
-    if (answers[currentIndex] === idx) {
-      input.checked = true;
-    }
+    if (answers[currentIndex] === idx) input.checked = true;
 
     input.addEventListener("change", () => {
       answers[currentIndex] = idx;
@@ -227,13 +232,11 @@ function submitQuiz() {
   const unattempted = dailyQuestions.length - attempted;
   const accuracy = attempted > 0 ? Math.round((score / attempted) * 100) : 0;
 
-  // Update stats
   statScore.textContent = `${score} / ${dailyQuestions.length}`;
   statAttempted.textContent = attempted;
   statUnattempted.textContent = unattempted;
   statAccuracy.textContent = `${accuracy}%`;
 
-  // Solutions
   solutionsList.innerHTML = "";
   dailyQuestions.forEach((q, idx) => {
     const div = document.createElement("div");
@@ -246,24 +249,23 @@ function submitQuiz() {
     const ansEl = document.createElement("div");
     ansEl.className = "solution-answer";
     ansEl.innerHTML =
-      `Correct Answer: <strong>${q.options[q.answer]}</strong><br>` +
+      `✅ Correct: <strong>${q.options[q.answer]}</strong><br>` +
       (answers[idx] !== undefined
-        ? `Your Answer: ${q.options[answers[idx]]}`
-        : "Not Attempted");
+        ? `📝 Your Answer: ${q.options[answers[idx]]}`
+        : "⏭ Not Attempted") +
+      (q.explanation ? `<br><em>💡 Explanation: ${q.explanation}</em>` : "");
 
     div.appendChild(qEl);
     div.appendChild(ansEl);
     solutionsList.appendChild(div);
   });
 
-  // Save result for later viewing
   const todayKey = new Date().toISOString().slice(0, 10);
   localStorage.setItem(
     "dmk-result-" + todayKey,
     JSON.stringify({ score, attempted, unattempted, accuracy })
   );
 
-  // Switch panel
   switchPanel("results");
 }
 

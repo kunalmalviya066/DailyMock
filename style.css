@@ -1,6 +1,6 @@
 /* =========================================
    DMK - Daily Mock Quiz App
-   Stylesheet: style.css (Final Optimized)
+   Stylesheet: style.css (Advanced Theme)
    ========================================= */
 
 /* ---------- RESET ---------- */
@@ -13,8 +13,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.5;
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -38,6 +38,7 @@ ul {
 
 h1, h2, h3, h4 {
   margin: 0.25em 0;
+  font-weight: 600;
 }
 
 p {
@@ -46,12 +47,12 @@ p {
 
 /* ---------- THEMES ---------- */
 :root {
-  --color-primary: #2563eb;
+  --color-primary: #3b82f6;
   --color-primary-dark: #1e40af;
-  --color-danger: #dc2626;
+  --color-danger: #ef4444;
 
-  --color-bg: #ffffff;
-  --color-bg-card: #f9fafb;
+  --color-bg: #f9fafb;
+  --color-bg-card: #ffffff;
   --color-bg-alt: #f3f4f6;
 
   --color-text: #111827;
@@ -66,15 +67,15 @@ p {
   --color-primary-dark: #2563eb;
   --color-danger: #f87171;
 
-  --color-bg: #111827;       /* page background */
-  --color-bg-card: #1f2937;  /* cards & quiz panels */
-  --color-bg-alt: #374151;   /* buttons, highlights */
+  --color-bg: #0f172a;
+  --color-bg-card: #1e293b;
+  --color-bg-alt: #334155;
 
-  --color-text: #f9fafb;
-  --color-text-muted: #d1d5db;
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
 
-  --color-border: #4b5563;
-  --shadow: rgba(0, 0, 0, 0.3);
+  --color-border: #475569;
+  --shadow: rgba(0, 0, 0, 0.4);
 }
 
 body {
@@ -83,7 +84,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.4s, color 0.4s;
 }
 
 /* ---------- LAYOUT ---------- */
@@ -97,7 +98,7 @@ body {
 .site-footer {
   background: var(--color-bg-card);
   border-bottom: 1px solid var(--color-border);
-  padding: 0.75rem 1rem;
+  padding: 1rem 1.5rem;
   transition: background 0.3s, border 0.3s;
 }
 
@@ -129,7 +130,7 @@ body {
 
 .logo-mark {
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   color: var(--color-primary);
 }
 
@@ -139,10 +140,11 @@ body {
 }
 
 .logo-mark-large {
-  font-weight: 700;
-  font-size: 2.5rem;
+  font-weight: 800;
+  font-size: 3rem;
   color: var(--color-primary);
   text-align: center;
+  letter-spacing: -1px;
 }
 
 /* ---------- ACCESSIBILITY ---------- */
@@ -156,10 +158,12 @@ body {
 
 /* ---------- BUTTONS ---------- */
 .btn {
-  padding: 0.6rem 1.2rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  transition: background 0.2s, color 0.2s, border 0.2s, transform 0.2s;
+  padding: 0.7rem 1.4rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.25s, color 0.25s, transform 0.25s, box-shadow 0.25s;
+  box-shadow: 0 2px 5px var(--shadow);
 }
 
 .btn.primary {
@@ -169,6 +173,7 @@ body {
 
 .btn.primary:hover {
   background: var(--color-primary-dark);
+  transform: translateY(-2px);
 }
 
 .btn.ghost {
@@ -179,6 +184,7 @@ body {
 
 .btn.ghost:hover {
   background: var(--color-bg-alt);
+  transform: translateY(-2px);
 }
 
 .btn.danger {
@@ -188,6 +194,7 @@ body {
 
 .btn.danger:hover {
   background: #b91c1c;
+  transform: translateY(-2px);
 }
 
 .btn.small {
@@ -196,11 +203,11 @@ body {
 }
 
 .btn.icon-btn {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   background: transparent;
   border-radius: 50%;
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.4rem;
+  height: 2.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -214,17 +221,17 @@ body {
 .card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
-  border-radius: 0.75rem;
-  padding: 1rem;
-  box-shadow: 0 2px 6px var(--shadow);
-  margin-bottom: 1rem;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px var(--shadow);
+  margin-bottom: 1.5rem;
   transition: background 0.3s, border 0.3s, box-shadow 0.3s;
 }
 
 /* ---------- PANELS ---------- */
 .panel {
   display: none;
-  padding: 1rem;
+  padding: 1.5rem;
   max-width: 1000px;
   margin: 0 auto;
   flex: 1;
@@ -233,7 +240,7 @@ body {
 
 .panel.active {
   display: block;
-  animation: fadeIn 0.3s ease;
+  animation: fadeIn 0.4s ease;
 }
 
 @keyframes fadeIn {
@@ -244,7 +251,13 @@ body {
 /* ---------- HOME ---------- */
 .home-card {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem 2rem;
+}
+
+.home-intro {
+  margin-top: 1rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
 }
 
 .home-actions {
@@ -256,7 +269,7 @@ body {
 }
 
 .home-actions .btn {
-  width: 200px;
+  width: 220px;
 }
 
 .meta-note {
@@ -299,29 +312,29 @@ body {
 .question-card,
 .side-card {
   background: var(--color-bg-card);
-  color: var(--color-text);
   border: 1px solid var(--color-border);
-  border-radius: 0.75rem;
-  padding: 1rem;
+  border-radius: 1rem;
+  padding: 1.5rem;
   transition: background 0.3s, color 0.3s, border 0.3s;
 }
 
 .q-content {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   margin-bottom: 1rem;
+  font-weight: 500;
 }
 
 .options-list li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
 .options-list label {
   display: flex;
   align-items: center;
-  padding: 0.4rem 0.6rem;
+  padding: 0.6rem 0.8rem;
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.25s;
 }
 
 .options-list label:hover {
@@ -329,18 +342,18 @@ body {
 }
 
 .options-list input[type="radio"] {
-  margin-right: 0.6rem;
+  margin-right: 0.8rem;
 }
 
 .q-controls {
   margin-top: 1rem;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.6rem;
   flex-wrap: wrap;
 }
 
 .final-submit {
-  margin-top: 1.5rem;
+  margin-top: 1.8rem;
   text-align: center;
 }
 
@@ -359,7 +372,11 @@ body {
   font-size: 0.9rem;
   background: var(--color-bg-alt);
   color: var(--color-text);
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.25s, transform 0.25s;
+}
+
+.palette button:hover {
+  transform: scale(1.1);
 }
 
 .palette button.active {
@@ -396,19 +413,18 @@ body {
 .dot.skipped { background: var(--color-danger); }
 
 /* ---------- RESULTS ---------- */
-/* ---------- RESULTS ---------- */
 .results-card {
   background: var(--color-bg-card);
-  color: var(--color-text);
   border: 1px solid var(--color-border);
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   padding: 2rem;
   transition: background 0.3s, color 0.3s, border 0.3s;
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 1rem;
   margin: 1.5rem 0;
 }
@@ -416,7 +432,7 @@ body {
 .stat {
   background: var(--color-bg-alt);
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   padding: 1rem;
   text-align: center;
   transition: background 0.3s, color 0.3s, border 0.3s;
@@ -428,8 +444,8 @@ body {
 }
 
 .stat-value {
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: 1.4rem;
+  font-weight: 700;
   color: var(--color-text);
 }
 
@@ -464,7 +480,6 @@ body {
   justify-content: center;
 }
 
-
 /* ---------- UTILITIES ---------- */
 .muted {
   color: var(--color-text-muted);
@@ -484,19 +499,20 @@ body {
     margin-bottom: 1rem;
   }
 }
-/* Red button for Go Back to Main Website */
+
+/* ---------- SPECIAL RED BUTTON ---------- */
 #go-main {
-  background-color: var(--color-danger); /* red background */
-  color: #fff;                           /* white text */
+  background-color: var(--color-danger);
+  color: #fff;
   border: 1px solid var(--color-danger);
   padding: 0.6rem 1.2rem;
   border-radius: 0.5rem;
-  font-weight: 500;
-  transition: background 0.2s, transform 0.2s;
+  font-weight: 600;
+  transition: background 0.25s, transform 0.25s;
+  box-shadow: 0 2px 6px var(--shadow);
 }
 
 #go-main:hover {
-  background-color: #b91c1c; /* darker red on hover */
+  background-color: #b91c1c;
   transform: translateY(-2px);
 }
-

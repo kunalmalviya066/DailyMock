@@ -1,6 +1,6 @@
 /* =========================================
     DMK - Daily Mock Quiz App
-    Stylesheet: style.css (Final Polished Theme)
+    Stylesheet: style.css (Enhanced Modern Theme)
 ========================================= */
 
 /* --- Base & Reset --- */
@@ -39,38 +39,37 @@ ul {
 h1, h2, h3, h4 {
   margin: 0.25em 0;
   font-weight: 700;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.5px; /* Subtle letter-spacing for a modern touch */
 }
 
 p {
   margin: 0.5em 0;
 }
 
-/* --- Final Color Palette --- */
+/* --- Color Palette --- */
 :root {
-  /* Main brand colors */
-  --color-primary-light: #6a11cb;
-  --color-primary-dark: #2575fc;
+  /* Vibrant and inviting primary color with a gradient feel */
+  --color-primary-start: #6a11cb;
+  --color-primary-end: #2575fc;
   --color-primary-text: #ffffff;
 
-  /* Neutrals for a clean, layered look */
-  --color-bg: #f9fafb; /* Lighter background for a brighter feel */
+  /* More sophisticated grays for a layered, clean look */
+  --color-bg: #f9fbfc;
   --color-bg-card: #ffffff;
-  --color-bg-alt: #f3f4f6;
+  --color-bg-alt: #f1f5f9;
 
-  /* Typography */
-  --color-text: #171717;
+  /* Deeper text colors for strong contrast */
+  --color-text: #1f2937;
   --color-text-muted: #6b7280;
 
-  /* Borders and Shadows */
-  --color-border: #e5e7eb;
-  --shadow: rgba(0, 0, 0, 0.05);
+  /* Soft, elegant border and shadow */
+  --color-border: #e2e8f0;
+  --shadow: rgba(0, 0, 0, 0.06);
 
-  /* Status Colors */
+  /* New colors for states */
   --color-success: #22c55e;
   --color-danger: #ef4444;
   --color-info: #3b82f6;
-  --color-warning: #f59e0b;
 }
 
 body {
@@ -79,7 +78,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  transition: all 0.4s ease-in-out;
+  transition: background 0.4s, color 0.4s;
 }
 
 /* --- Layout & Components --- */
@@ -93,8 +92,8 @@ body {
 .site-footer {
   background: var(--color-bg-card);
   border-bottom: 1px solid var(--color-border);
-  padding: 1.5rem 2.5rem; /* More generous padding */
-  transition: all 0.3s ease;
+  padding: 1.5rem 2rem; /* Increased padding */
+  transition: background 0.3s, border 0.3s;
 }
 
 .site-footer {
@@ -125,23 +124,24 @@ body {
 
 .logo-mark {
   font-weight: 800;
-  font-size: 1.8rem;
-  background-image: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-dark));
+  font-size: 1.6rem;
+  /* Applying a subtle gradient to the logo */
+  background-image: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .logo-text {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--color-text-muted);
 }
 
 .logo-mark-large {
   font-weight: 800;
-  font-size: 6rem; /* Larger and more dramatic */
+  font-size: 5rem;
   text-align: center;
-  letter-spacing: -4px;
-  background-image: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-dark));
+  letter-spacing: -3px;
+  background-image: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -157,27 +157,27 @@ body {
 
 /* --- Buttons --- */
 .btn {
-  padding: 1rem 2rem;
-  border-radius: 9999px; /* Full pill shape */
+  padding: 0.9rem 1.8rem;
+  border-radius: 2rem; /* Pill shape for a modern, soft look */
   font-weight: 600;
   font-size: 1rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px var(--shadow);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother animation curve */
+  box-shadow: 0 4px 10px var(--shadow);
 }
 
 .btn.primary {
-  background-image: linear-gradient(45deg, var(--color-primary-light), var(--color-primary-dark));
+  background-image: linear-gradient(45deg, var(--color-primary-start), var(--color-primary-end));
   color: var(--color-primary-text);
   border: none;
 }
 
 .btn.primary:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 15px var(--shadow);
 }
 
 .btn.ghost {
-  background: var(--color-bg-card);
+  background: transparent;
   border: 2px solid var(--color-border);
   color: var(--color-text-muted);
   box-shadow: none;
@@ -186,7 +186,7 @@ body {
 .btn.ghost:hover {
   background: var(--color-bg-alt);
   transform: translateY(-2px);
-  box-shadow: 0 2px 8px var(--shadow);
+  box-shadow: 0 4px 8px var(--shadow);
 }
 
 .btn.danger {
@@ -205,11 +205,11 @@ body {
 }
 
 .btn.icon-btn {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   background: transparent;
   border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
+  width: 2.8rem;
+  height: 2.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -219,29 +219,28 @@ body {
 
 .btn.icon-btn:hover {
   background: var(--color-bg-alt);
-  transform: translateY(-2px);
 }
 
 /* --- Cards --- */
 .card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
-  border-radius: 1.5rem;
-  padding: 3rem; /* Extra padding for a luxurious feel */
-  box-shadow: 0 10px 30px var(--shadow);
+  border-radius: 1.5rem; /* Even more rounded */
+  padding: 2.5rem; /* More space */
+  box-shadow: 0 8px 25px var(--shadow);
   margin-bottom: 2rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* --- Panels --- */
 .panel {
   display: none;
-  padding: 3rem;
+  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
   flex: 1;
@@ -250,7 +249,7 @@ body {
 
 .panel.active {
   display: block;
-  animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeIn 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 @keyframes fadeIn {
@@ -258,152 +257,130 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Home Panel --- */
-.home-card {
-  text-align: center;
-  padding: 5rem 2rem;
-}
-
-.home-intro {
-  margin-top: 2rem;
-  color: var(--color-text-muted);
-  font-size: 1.25rem;
-}
-
-.home-actions {
-  margin-top: 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.home-actions .btn {
-  width: 280px;
-}
-
 /* --- Quiz Panel --- */
-.quiz-header {
-  margin-bottom: 2rem;
-}
-
-.timer {
-  font-size: 1.6rem;
-}
-
-.q-content {
-  font-size: 1.35rem;
-  margin-bottom: 2rem;
-  line-height: 1.7;
+.question-card,
+.side-card {
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 8px 25px var(--shadow);
+  transition: all 0.3s ease;
 }
 
 .options-list li {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .options-list label {
-  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.2rem;
   border-radius: 1rem;
-  background: var(--color-bg-alt);
-  border: 2px solid transparent;
+  cursor: pointer;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  transition: all 0.25s ease;
 }
 
 .options-list label:hover {
-  background: var(--color-bg-card);
-  border-color: var(--color-primary-dark);
+  background: var(--color-bg-alt);
+  border-color: var(--color-primary-end);
 }
 
+/* Checked state with a visual cue */
 .options-list input[type="radio"]:checked + span {
-  font-weight: 700;
-  color: var(--color-primary-dark);
+  font-weight: 600;
+  color: var(--color-primary-end);
 }
 
 .options-list input[type="radio"] {
-  width: 1.6rem;
-  height: 1.6rem;
+  margin-right: 1rem;
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
   border: 2px solid var(--color-border);
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.2s ease;
 }
 
 .options-list input[type="radio"]:checked {
-  border-color: var(--color-primary-dark);
-  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-end);
+  background-color: var(--color-primary-end);
+}
+
+.options-list input[type="radio"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: #fff;
+  border-radius: 50%;
 }
 
 /* --- Palette --- */
 .palette button {
   border: 2px solid var(--color-border);
   border-radius: 0.75rem;
-  padding: 0.8rem;
-  font-size: 1rem;
-  background: var(--color-bg-card);
+  padding: 0.6rem;
+  font-size: 0.95rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: all 0.25s ease-in-out;
+}
+
+.palette button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 5px var(--shadow);
 }
 
 .palette button.active {
-  background-image: linear-gradient(45deg, var(--color-primary-light), var(--color-primary-dark));
+  background-image: linear-gradient(45deg, var(--color-primary-start), var(--color-primary-end));
   color: #fff;
-  border: none;
+  border-color: var(--color-primary-end);
 }
 
 .palette button.answered {
   background: var(--color-success);
   color: #fff;
-  border: none;
+  border-color: var(--color-success);
 }
 
 .palette button.skipped {
   background: var(--color-danger);
   color: #fff;
-  border: none;
+  border-color: var(--color-danger);
 }
+
+.dot.answered { background: var(--color-success); }
+.dot.skipped { background: var(--color-danger); }
 
 /* --- Results Panel --- */
-.results-card {
-  padding: 3.5rem;
-  box-shadow: 0 10px 30px var(--shadow);
-}
-
-.stat {
-  background: var(--color-bg-alt);
-  border: 1px solid var(--color-border);
-  border-radius: 1.25rem;
-  padding: 1.5rem;
-}
-
 .stat-value {
-  background-image: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-dark));
+  background-image: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 800;
 }
 
-.solution-question {
-  color: var(--color-text);
-  font-size: 1.1rem;
-}
-
-/* --- Responsive adjustments --- */
-@media (max-width: 768px) {
-  .site-header, .site-footer, .panel {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
-
-/* --- Final Red Button --- */
+/* --- Special Red Button (Final polish) --- */
 #go-main {
   background-color: var(--color-danger);
   color: #fff;
   border: 1px solid var(--color-danger);
-  padding: 1rem 2rem;
-  border-radius: 9999px;
+  padding: 0.8rem 1.6rem;
+  border-radius: 2rem; /* Pill shape */
   font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 #go-main:hover {
   background-color: #b91c1c;
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }

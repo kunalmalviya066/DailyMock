@@ -78,15 +78,23 @@ document.addEventListener("DOMContentLoaded", () => {
 /* --------- QUIZ LOGIC --------- */
 function startQuiz() {
   const todayKey = new Date().toISOString().slice(0, 10);
-  const savedSet = localStorage.getItem("dmk-set-" + todayKey);
+  const now = new Date();
+  const uniqueKey = now.toISOString().slice(0, 19); // includes seconds for randomness
 
-  if (savedSet) {
-    dailyQuestions = JSON.parse(savedSet);
-  } else {
-    dailyQuestions = pickDailyQuestions(10); // pick 10 random questions
-    localStorage.setItem("dmk-set-" + todayKey, JSON.stringify(dailyQuestions));
-  }
+  // Fetch today's used question IDs to prevent repetition
+  const usedIds = JSON.parse(localStorage.getItem("dmk-used-" + todayKey) || "[]");
 
+  // Pick a new set of random questions excluding already used ones
+  dailyQuestions = pickDailyQuestions(10, usedIds);
+
+  // Record these IDs as used for today
+  const allUsed = [...usedIds, ...dailyQuestions.map(q => q.id)];
+  localStorage.setItem("dmk-used-" + todayKey, JSON.stringify(allUsed));
+
+  // Save today's generated set (for reference/debug)
+  localStorage.setItem("dmk-set-" + uniqueKey, JSON.stringify(dailyQuestions));
+
+  // Reset state
   answers = {};
   currentIndex = 0;
   timeLeft = 600;
@@ -98,23 +106,27 @@ function startQuiz() {
   switchPanel("quiz");
 }
 
-function pickDailyQuestions(count = 10) {
+function pickDailyQuestions(count = 10, excludeIds = []) {
   // Flatten all questions from all topics
   const pool = Object.values(questionsDB).flat();
 
-  if (pool.length < count) {
-    console.error("Not enough questions in the database!");
-    return pool;
+  // Filter out questions already used today
+  const available = pool.filter(q => !excludeIds.includes(q.id));
+
+  if (available.length < count) {
+    console.warn("Not enough unused questions. Reusing some...");
   }
 
+  const finalPool = available.length >= count ? available : pool;
+
   // Shuffle all questions using Fisher-Yates
-  for (let i = pool.length - 1; i > 0; i--) {
+  for (let i = finalPool.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
+    [finalPool[i], finalPool[j]] = [finalPool[j], finalPool[i]];
   }
 
   // Pick first 'count' questions
-  const selected = pool.slice(0, count);
+  const selected = finalPool.slice(0, count);
 
   // Shuffle options for each question
   selected.forEach(q => {
@@ -260,6 +272,7 @@ function submitQuiz() {
     solutionsList.appendChild(div);
   });
 
+  // Store today's result (keyed by date only)
   const todayKey = new Date().toISOString().slice(0, 10);
   localStorage.setItem(
     "dmk-result-" + todayKey,

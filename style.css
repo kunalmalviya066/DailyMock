@@ -1,6 +1,6 @@
 /* =========================================
     DMK - Daily Mock Quiz App
-    Stylesheet: style.css (Enhanced Modern Theme)
+    Stylesheet: style.css (Final Dark Theme)
 ========================================= */
 
 /* --- Base & Reset --- */
@@ -39,37 +39,33 @@ ul {
 h1, h2, h3, h4 {
   margin: 0.25em 0;
   font-weight: 700;
-  letter-spacing: -0.5px; /* Subtle letter-spacing for a modern touch */
+  letter-spacing: -0.5px;
 }
 
 p {
   margin: 0.5em 0;
 }
 
-/* --- Color Palette --- */
+/* --- Color Palette (Dark Theme) --- */
 :root {
-  /* Vibrant and inviting primary color with a gradient feel */
-  --color-primary-start: #6a11cb;
-  --color-primary-end: #2575fc;
+  --color-primary-start: #6c5ce7;
+  --color-primary-end: #48a4c8;
   --color-primary-text: #ffffff;
 
-  /* More sophisticated grays for a layered, clean look */
-  --color-bg: #f9fbfc;
-  --color-bg-card: #ffffff;
-  --color-bg-alt: #f1f5f9;
+  --color-bg: #1a1a2e;
+  --color-bg-card: #20203a;
+  --color-bg-alt: #2c2c4b;
 
-  /* Deeper text colors for strong contrast */
-  --color-text: #1f2937;
-  --color-text-muted: #6b7280;
+  --color-text: #e8e8e8;
+  --color-text-muted: #a0a0b2;
 
-  /* Soft, elegant border and shadow */
-  --color-border: #e2e8f0;
-  --shadow: rgba(0, 0, 0, 0.06);
+  --color-border: #333355;
+  --shadow: rgba(0, 0, 0, 0.25);
+  --shadow-hover: rgba(0, 0, 0, 0.4);
 
-  /* New colors for states */
-  --color-success: #22c55e;
-  --color-danger: #ef4444;
-  --color-info: #3b82f6;
+  --color-success: #2ed573;
+  --color-danger: #ff4757;
+  --color-info: #5352ed;
 }
 
 body {
@@ -92,7 +88,7 @@ body {
 .site-footer {
   background: var(--color-bg-card);
   border-bottom: 1px solid var(--color-border);
-  padding: 1.5rem 2rem; /* Increased padding */
+  padding: 1.5rem 2rem;
   transition: background 0.3s, border 0.3s;
 }
 
@@ -125,7 +121,6 @@ body {
 .logo-mark {
   font-weight: 800;
   font-size: 1.6rem;
-  /* Applying a subtle gradient to the logo */
   background-image: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -158,22 +153,24 @@ body {
 /* --- Buttons --- */
 .btn {
   padding: 0.9rem 1.8rem;
-  border-radius: 2rem; /* Pill shape for a modern, soft look */
+  border-radius: 2rem;
   font-weight: 600;
   font-size: 1rem;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother animation curve */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   box-shadow: 0 4px 10px var(--shadow);
 }
 
 .btn.primary {
   background-image: linear-gradient(45deg, var(--color-primary-start), var(--color-primary-end));
-  color: var(--color-primary-text);
+  color: #ffffff;
   border: none;
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn.primary:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 15px var(--shadow);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 .btn.ghost {
@@ -195,7 +192,7 @@ body {
 }
 
 .btn.danger:hover {
-  background-color: #b91c1c;
+  background-color: #d13d4b;
   transform: translateY(-2px);
 }
 
@@ -225,8 +222,8 @@ body {
 .card {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
-  border-radius: 1.5rem; /* Even more rounded */
-  padding: 2.5rem; /* More space */
+  border-radius: 1.5rem;
+  padding: 2.5rem;
   box-shadow: 0 8px 25px var(--shadow);
   margin-bottom: 2rem;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -234,7 +231,7 @@ body {
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 30px var(--shadow-hover);
 }
 
 /* --- Panels --- */
@@ -277,7 +274,7 @@ body {
   padding: 1rem 1.2rem;
   border-radius: 1rem;
   cursor: pointer;
-  background: var(--color-bg);
+  background: var(--color-bg-card);
   border: 2px solid var(--color-border);
   transition: all 0.25s ease;
 }
@@ -287,7 +284,6 @@ body {
   border-color: var(--color-primary-end);
 }
 
-/* Checked state with a visual cue */
 .options-list input[type="radio"]:checked + span {
   font-weight: 600;
   color: var(--color-primary-end);
@@ -327,7 +323,7 @@ body {
   border-radius: 0.75rem;
   padding: 0.6rem;
   font-size: 0.95rem;
-  background: var(--color-bg);
+  background: var(--color-bg-card);
   color: var(--color-text);
   transition: all 0.25s ease-in-out;
 }
@@ -373,14 +369,14 @@ body {
   color: #fff;
   border: 1px solid var(--color-danger);
   padding: 0.8rem 1.6rem;
-  border-radius: 2rem; /* Pill shape */
+  border-radius: 2rem;
   font-weight: 600;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px var(--shadow);
 }
 
 #go-main:hover {
-  background-color: #b91c1c;
+  background-color: #d13d4b;
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 15px var(--shadow-hover);
 }

@@ -10,12 +10,22 @@
   box-sizing: border-box;
 }
 
-html, body {
+html {
+  font-size: 16px; /* Base font size for rem units */
+}
+
+body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.4s, color 0.4s;
 }
 
 img, svg {
@@ -37,10 +47,15 @@ ul {
 }
 
 h1, h2, h3, h4 {
-  margin: 0.25em 0;
+  margin: 0.5em 0;
   font-weight: 700;
   letter-spacing: -0.5px;
 }
+
+h1 { font-size: clamp(2rem, 5vw, 3rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+h3 { font-size: clamp(1.25rem, 3.5vw, 2rem); }
+h4 { font-size: clamp(1rem, 3vw, 1.5rem); }
 
 p {
   margin: 0.5em 0;
@@ -68,15 +83,6 @@ p {
   --color-info: #5352ed;
 }
 
-body {
-  background: var(--color-bg);
-  color: var(--color-text);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  transition: background 0.4s, color 0.4s;
-}
-
 /* --- Layout & Components --- */
 #app {
   flex: 1;
@@ -88,7 +94,7 @@ body {
 .site-footer {
   background: var(--color-bg-card);
   border-bottom: 1px solid var(--color-border);
-  padding: 1.5rem 2rem;
+  padding: 1.5rem 1rem;
   transition: background 0.3s, border 0.3s;
 }
 
@@ -99,6 +105,7 @@ body {
   text-align: center;
   font-size: 0.875rem;
   color: var(--color-text-muted);
+  padding: 1rem;
 }
 
 .header-inner,
@@ -109,6 +116,7 @@ body {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  gap: 1rem;
 }
 
 /* --- Branding --- */
@@ -133,7 +141,7 @@ body {
 
 .logo-mark-large {
   font-weight: 800;
-  font-size: 5rem;
+  font-size: clamp(3rem, 10vw, 5rem);
   text-align: center;
   letter-spacing: -3px;
   background-image: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
@@ -163,8 +171,7 @@ body {
 .btn.primary {
   background-image: linear-gradient(45deg, var(--color-primary-start), var(--color-primary-end));
   color: #ffffff;
-  border: none;
-  border: 1px solid rgba(255, 255, 255, 0.1); 
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -223,7 +230,7 @@ body {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: 1.5rem;
-  padding: 2.5rem;
+  padding: 2rem 1.5rem; /* Adjusted for smaller screens */
   box-shadow: 0 8px 25px var(--shadow);
   margin-bottom: 2rem;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -237,7 +244,7 @@ body {
 /* --- Panels --- */
 .panel {
   display: none;
-  padding: 2rem;
+  padding: 2rem 1rem;
   max-width: 1200px;
   margin: 0 auto;
   flex: 1;
@@ -255,8 +262,15 @@ body {
 }
 
 /* --- Quiz Panel --- */
+.quiz-panel-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
 .question-card,
 .side-card {
+  background: var(--color-bg-card); /* moved background here for consistency */
   border: 1px solid var(--color-border);
   border-radius: 1.5rem;
   padding: 2rem;
@@ -318,14 +332,23 @@ body {
 }
 
 /* --- Palette --- */
+.palette {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
 .palette button {
   border: 2px solid var(--color-border);
   border-radius: 0.75rem;
-  padding: 0.6rem;
+  padding: 0.6rem 0.8rem;
   font-size: 0.95rem;
   background: var(--color-bg-card);
   color: var(--color-text);
   transition: all 0.25s ease-in-out;
+  flex-basis: 3rem;
 }
 
 .palette button:hover {
@@ -359,7 +382,7 @@ body {
   background-image: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 2.2rem;
+  font-size: clamp(1.8rem, 5vw, 2.2rem); /* fluid sizing */
   font-weight: 800;
 }
 
@@ -379,4 +402,38 @@ body {
   background-color: #d13d4b;
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 8px 15px var(--shadow-hover);
+}
+
+/* --- Media Queries for Tablets & Desktops --- */
+
+/* Tablets (min-width: 768px) */
+@media (min-width: 768px) {
+  .site-header, .site-footer {
+    padding: 1.5rem 2rem;
+  }
+  
+  .card {
+    padding: 2.5rem;
+  }
+  
+  .panel {
+    padding: 2rem;
+  }
+  
+  .quiz-panel-layout {
+    grid-template-columns: 2fr 1fr;
+  }
+  
+  .palette button {
+    flex-basis: auto;
+  }
+}
+
+/* Desktops (min-width: 1024px) */
+@media (min-width: 1024px) {
+  .header-inner,
+  .footer-inner {
+    flex-wrap: nowrap;
+    gap: 2rem;
+  }
 }

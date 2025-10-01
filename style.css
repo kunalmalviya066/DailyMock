@@ -437,3 +437,53 @@ p {
     gap: 2rem;
   }
 }
+/* Force the Next button visible */
+#next-btn.btn {
+  background: linear-gradient(45deg, var(--color-primary-start), var(--color-primary-end)) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#next-btn.btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+#next-btn.btn:disabled {
+  background: var(--color-bg-alt) !important;
+  color: var(--color-text-muted) !important;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+/* === Previous & Skip Button Fixes === */
+
+/* Previous Button (soft contrast, visible) */
+#prev-btn.btn {
+  background: var(--color-bg-alt) !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#prev-btn.btn:hover {
+  background: var(--color-primary-start);
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Skip Button (red tone for attention) */
+#skip-btn.btn {
+  background: transparent !important;
+  border: 2px solid var(--color-danger) !important;
+  color: var(--color-danger) !important;
+  box-shadow: none;
+}
+
+#skip-btn.btn:hover {
+  background: var(--color-danger) !important;
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}

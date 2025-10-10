@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,38 +8,57 @@
   <!-- Link to stylesheet -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- App icon / favicon (simple inlined SVG data URL for portability) -->
+  <!-- App icon / favicon -->
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23222'/%3E%3Ctext x='50' y='58' font-size='38' text-anchor='middle' fill='%23fff' font-family='Arial' font-weight='700'%3EDM%3C/text%3E%3C/svg%3E">
 
-  <!-- Meta for theme color -->
   <meta name="theme-color" content="#ffffff" />
 </head>
 <body>
+  <!-- Activation Popup -->
+  <div id="activation-popup" class="activation-popup">
+    <!-- Step 1: User Details -->
+    <div class="step" id="step1">
+      <h3>Step 1: Enter Your Details</h3>
+      <input type="text" id="user-name" placeholder="Name" />
+      <input type="email" id="user-email" placeholder="Email" />
+      <input type="tel" id="user-mobile" placeholder="Mobile" />
+      <button id="step1-next">Next</button>
+    </div>
+
+    <!-- Step 2: Tasks -->
+    <div class="step" id="step2" hidden>
+      <h3>Step 2: Complete Tasks</h3>
+      <div id="task-container"></div>
+      <button id="step2-next">Next</button>
+    </div>
+
+    <!-- Step 3: Generate Key -->
+    <div class="step" id="step3" hidden>
+      <h3>Step 3: Your Activation Key</h3>
+      <p id="generated-key" class="key-display"></p>
+      <button id="copy-key">Copy Key</button>
+      <button id="validate-key">Validate Key</button>
+    </div>
+  </div>
+
   <!-- App container -->
-  <div id="app" class="light"> <!-- class toggled to 'dark' by script for dark mode -->
+  <div id="app" class="light">
     <!-- Header with logo, title and controls -->
     <header class="site-header">
       <div class="header-inner">
         <div class="brand" role="banner">
-          <!-- Logo: DMK - Daily Mock -->
           <div class="logo" aria-hidden="true">
             <span class="logo-mark">DMK</span>
             <span class="logo-text">Daily Mock</span>
           </div>
           <h1 class="sr-only">DMK - Daily Mock</h1>
         </div>
-
         <div class="header-controls">
-          <!-- Show current date for clarity -->
           <div id="today-display" class="today-display" aria-live="polite"></div>
-
-        
         </div>
-        <!-- Add this inside your home-card div, after existing content -->
-<div class="home-actions">
-  <button class="btn ghost" id="go-main">Go Back to Main Interface</button>
-</div>
-
+        <div class="home-actions">
+          <button class="btn ghost" id="go-main">Go Back to Main Interface</button>
+        </div>
       </div>
     </header>
 
@@ -50,19 +67,14 @@
       <!-- HOME / LANDING SECTION -->
       <section id="home" class="panel active" aria-labelledby="home-title">
         <div class="card home-card">
-          <!-- prominent DMK header -->
           <div class="home-top">
             <div class="home-logo">
               <div class="logo-mark-large">DMK</div>
             </div>
             <div class="home-intro">
-              
               <p class="muted">Take a fresh 10-question quiz every day. Built for quick practice — 10 minutes, 10 questions, one daily set.</p>
             </div>
-            
           </div>
-
-          <!-- Controls -->
           <div class="home-actions">
             <button id="start-quiz" class="btn primary" aria-label="Start today's quiz">Start Quiz</button>
             <button id="view-last-result" class="btn ghost" aria-label="View last results">View Last Result</button>
@@ -71,55 +83,38 @@
         </div>
       </section>
 
-      <!-- QUIZ SECTION (Single-page app style) -->
+      <!-- QUIZ SECTION -->
       <section id="quiz" class="panel" aria-labelledby="quiz-title" hidden>
         <div class="quiz-header">
           <div class="quiz-title-wrapper">
             <h2 id="quiz-title">Today's Mock</h2>
             <div class="quiz-sub"> All Quant Topic Mixed</div>
           </div>
-
-          <!-- Timer and progress -->
           <div class="quiz-meta">
             <div id="timer" class="timer" role="timer" aria-live="polite">10:00</div>
             <div id="question-progress" class="progress">Q <span id="current-q">1</span> / 10</div>
           </div>
         </div>
-
         <div class="quiz-body">
-          <!-- Question card container -->
           <div id="question-card" class="card question-card" aria-live="polite">
-            <!-- Question content injected by script -->
             <div id="q-content" class="q-content"></div>
-
-            <!-- Options list -->
             <ul id="options-list" class="options-list" role="list"></ul>
-
-            <!-- Navigation controls -->
             <div class="q-controls">
               <button id="prev-btn" class="btn ghost" type="button">Previous</button>
               <button id="skip-btn" class="btn ghost" type="button">Skip</button>
               <button id="next-btn" class="btn" type="button">Next</button>
             </div>
-
-            <!-- Final submit -->
             <div class="final-submit">
               <button id="final-submit" class="btn danger" type="button">Final Submit</button>
               <div class="small muted">You can submit anytime. Timer will auto-submit when it reaches 0.</div>
             </div>
           </div>
-
-          <!-- Sidebar: question palette & summary (collapsible on mobile) -->
           <aside id="quiz-side" class="card side-card">
             <div class="side-top">
               <h3 class="side-title">Question Palette</h3>
               <div class="side-sub muted">Click a number to jump</div>
             </div>
-
-            <div id="palette" class="palette" role="navigation" aria-label="Question palette">
-              <!-- Buttons injected by script: 1..10 -->
-            </div>
-
+            <div id="palette" class="palette" role="navigation" aria-label="Question palette"></div>
             <div class="side-footer">
               <div class="legend">
                 <span class="legend-item"><span class="dot answered"></span>Answered</span>
@@ -138,9 +133,7 @@
             <h2 id="results-title">Quiz Results</h2>
             <div id="score-summary" class="score-summary"></div>
           </div>
-
           <div id="results-stats" class="stats-grid">
-            <!-- Stats injected by script -->
             <div class="stat">
               <div class="stat-label">Total Score</div>
               <div id="stat-score" class="stat-value">0 / 10</div>
@@ -158,13 +151,10 @@
               <div id="stat-accuracy" class="stat-value">0%</div>
             </div>
           </div>
-
-          <!-- Solutions (collapsible) -->
           <div id="solutions" class="solutions">
             <h3>Solutions</h3>
             <div id="solutions-list"></div>
           </div>
-
           <div class="results-actions">
             <button id="retry-today" class="btn primary" disabled>Retry Today's Quiz</button>
             <button id="back-home" class="btn ghost">Back to Home</button>
@@ -173,7 +163,6 @@
       </section>
     </main>
 
-    <!-- Footer -->
     <footer class="site-footer">
       <div class="footer-inner">
         <small>© <span id="footer-year"></span> DMK — Daily Mock Series</small>
@@ -181,9 +170,9 @@
     </footer>
   </div>
 
-  <!-- Scripts: db.js contains local questions, script.js contains app logic -->
-  <!-- db.js must be included BEFORE script.js so the app can access the questions. -->
+  <!-- Scripts -->
   <script src="db.js"></script>
   <script src="script.js"></script>
+  <script src="activation.js"></script>
 </body>
 </html>

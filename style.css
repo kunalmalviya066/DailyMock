@@ -487,3 +487,119 @@ p {
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
+
+/* ===========================
+   Activation Popup Styles
+=========================== */
+.activation-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  font-family: Arial, sans-serif;
+}
+
+/* Each step container */
+.activation-popup .step {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* Headings inside popup */
+.activation-popup h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #222;
+}
+
+/* Input fields */
+.activation-popup input[type="text"],
+.activation-popup input[type="email"],
+.activation-popup input[type="tel"] {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin: 0.5rem 0 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Buttons */
+.activation-popup button {
+  padding: 0.6rem 1.2rem;
+  margin: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Primary action button */
+.activation-popup button#step1-next,
+.activation-popup button#step2-next,
+.activation-popup button#validate-key {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.activation-popup button#step1-next:hover,
+.activation-popup button#step2-next:hover,
+.activation-popup button#validate-key:hover {
+  background-color: #0056b3;
+}
+
+/* Secondary button (copy key) */
+.activation-popup button#copy-key {
+  background-color: #f0f0f0;
+  color: #222;
+}
+
+.activation-popup button#copy-key:hover {
+  background-color: #ddd;
+}
+
+/* Key display */
+.activation-popup .key-display {
+  font-family: monospace;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  padding: 0.6rem;
+  background: #f7f7f7;
+  border-radius: 6px;
+  user-select: all;
+}
+
+/* Task container inside step 2 */
+#task-container div {
+  margin-bottom: 1rem;
+}
+
+#task-container p {
+  margin: 0.3rem 0;
+  font-weight: 500;
+  color: #333;
+}
+
+#task-container input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Hidden steps */
+.activation-popup .step[hidden] {
+  display: none;
+}
+

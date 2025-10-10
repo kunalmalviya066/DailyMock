@@ -5,6 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!storedKey || !tokenExpire || new Date() >= new Date(tokenExpire)) {
     document.getElementById('activation-popup').style.display = 'flex';
     document.querySelector('main').hidden = true; // hide main quiz until validated
+
+    // Pre-fill user info if previously entered
+    const user = JSON.parse(localStorage.getItem('activationUser')) || {};
+    if(user.name) document.getElementById('user-name').value = user.name;
+    if(user.email) document.getElementById('user-email').value = user.email;
+    if(user.mobile) document.getElementById('user-mobile').value = user.mobile;
+  } else {
+    document.getElementById('activation-popup').style.display = 'none';
+    document.querySelector('main').hidden = false;
   }
 });
 
@@ -16,12 +25,14 @@ document.getElementById('step1-next').addEventListener('click', () => {
 
   if(!name || !email || !mobile) return alert("Please fill all fields!");
 
-  sessionStorage.setItem('activationUser', JSON.stringify({ name, email, mobile }));
+  // Persist user info in localStorage
+  localStorage.setItem('activationUser', JSON.stringify({ name, email, mobile }));
 
   document.getElementById('step1').hidden = true;
   document.getElementById('step2').hidden = false;
 
-  generateTasks();
+  // Generate tasks only if not already present
+  if(!localStorage.getItem('activationTasks')) generateTasks();
 });
 
 // Step 2: Generate Random Tasks
@@ -29,7 +40,7 @@ function generateTasks() {
   const container = document.getElementById('task-container');
   container.innerHTML = '';
 
-  const user = JSON.parse(sessionStorage.getItem('activationUser'));
+  const user = JSON.parse(localStorage.getItem('activationUser'));
 
   const taskPool = [
     { question: 'Solve 5 + 7 = ?', answer: '12' },
@@ -42,7 +53,7 @@ function generateTasks() {
     { question: 'Solve 9 ÷ 3 = ?', answer: '3' }
   ];
 
-  // pick 3 random tasks
+  // Pick 3 random tasks
   const tasks = taskPool.sort(() => 0.5 - Math.random()).slice(0,3);
 
   tasks.forEach((t, idx) => {
@@ -51,12 +62,12 @@ function generateTasks() {
     container.appendChild(div);
   });
 
-  sessionStorage.setItem('activationTasks', JSON.stringify(tasks));
+  localStorage.setItem('activationTasks', JSON.stringify(tasks));
 }
 
 // Step 2 Next: Validate Tasks
 document.getElementById('step2-next').addEventListener('click', () => {
-  const tasks = JSON.parse(sessionStorage.getItem('activationTasks'));
+  const tasks = JSON.parse(localStorage.getItem('activationTasks'));
   let allCorrect = true;
 
   tasks.forEach((t, idx) => {
@@ -72,6 +83,7 @@ document.getElementById('step2-next').addEventListener('click', () => {
   const key = generateRandomKey();
   document.getElementById('generated-key').textContent = key;
 
+  // Store key and expiry
   localStorage.setItem('userToken', key);
   localStorage.setItem('tokenExpire', new Date(Date.now() + 7*24*60*60*1000).toISOString());
 });
@@ -98,5 +110,8 @@ document.getElementById('validate-key').addEventListener('click', () => {
     alert("Activation Successful! You can now use DMK.");
     document.getElementById('activation-popup').style.display = 'none';
     document.querySelector('main').hidden = false;
+
+    // Optional: clean up tasks to avoid repeated Step 2 display
+    localStorage.removeItem('activationTasks');
   }
 });

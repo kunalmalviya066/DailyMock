@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const main = document.querySelector('main');
 
   // === ADMIN VERSION CONTROL ===
-  const ACTIVATION_VERSION = '1.0.4';
+  const ACTIVATION_VERSION = '1.0.5';
   const savedVersion = localStorage.getItem('activationVersion');
 
   if (savedVersion !== ACTIVATION_VERSION) {

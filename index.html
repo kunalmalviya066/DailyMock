@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,31 +16,40 @@
 </head>
 <body>
   <!-- Activation Popup -->
-  <div id="activation-popup" class="activation-popup">
-    <!-- Step 1: User Details -->
-    <div class="step" id="step1">
-      <h3>Step 1: Enter Your Details</h3>
-      <input type="text" id="user-name" placeholder="Name" />
-      <input type="email" id="user-email" placeholder="Email" />
-      <input type="tel" id="user-mobile" placeholder="Mobile" />
-      <button id="step1-next">Next</button>
-    </div>
-
-    <!-- Step 2: Tasks -->
-    <div class="step" id="step2" hidden>
-      <h3>Step 2: Complete Tasks</h3>
-      <div id="task-container"></div>
-      <button id="step2-next">Next</button>
-    </div>
-
-    <!-- Step 3: Generate Key -->
-    <div class="step" id="step3" hidden>
-      <h3>Step 3: Your Activation Key</h3>
-      <p id="generated-key" class="key-display"></p>
-      <button id="copy-key">Copy Key</button>
-      <button id="validate-key">Validate Key</button>
-    </div>
+<div id="activation-popup" class="activation-popup">
+  <!-- Step 1: User Details -->
+  <div class="step" id="step1">
+    <h3>Step 1: Enter Your Details</h3>
+    <input type="text" id="user-name" placeholder="Full Name" />
+    <input type="email" id="user-email" placeholder="Email" />
+    <input type="tel" id="user-mobile" placeholder="Mobile" />
+    <button id="step1-next">Next</button>
   </div>
+
+  <!-- Step 2: Smart Tasks -->
+  <div class="step" id="step2" hidden>
+    <h3>Step 2: Solve These Tasks</h3>
+    <div id="task-container"></div>
+    <button id="step2-next">Next</button>
+  </div>
+
+  <!-- Step 3: Verification Challenge -->
+  <div class="step" id="step3" hidden>
+    <h3>Step 3: Quick Verification</h3>
+    <p id="verify-question" class="verify-q"></p>
+    <input type="text" id="verify-answer" placeholder="Enter your answer" />
+    <button id="step3-next">Next</button>
+  </div>
+
+  <!-- Step 4: Key Display -->
+  <div class="step" id="step4" hidden>
+    <h3>Step 4: Your Activation Key</h3>
+    <p id="generated-key" class="key-display"></p>
+    <button id="copy-key">Copy Key</button>
+    <button id="validate-key">Validate & Continue</button>
+  </div>
+</div>
+
 
   <!-- App container -->
   <div id="app" class="light">
